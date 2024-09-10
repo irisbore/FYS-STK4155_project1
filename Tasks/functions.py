@@ -8,8 +8,9 @@ def FrankeFunction(x,y):
     term3 = 0.5*np.exp(-(9*x-7)**2/4.0 - 0.25*((9*y-3)**2))
     term4 = -0.2*np.exp(-(9*x-4)**2 - (9*y-7)**2)
     #Noise term
-    term5 = 0 #np.random.normal(0, 0.1, len(x))
+    term5 = np.random.normal(0, 0.1, len(x))
     return term1 + term2 + term3 + term4 + term5
+
 
 # Design matrix
 def create_design_matrix(x, y, degree):
@@ -37,3 +38,39 @@ def create_design_matrix(x, y, degree):
     else:
         print("Degree not implemented")
     return X
+
+"""
+# Design matrix
+def create_design_matrix(x, y, degree):
+    X = np.zeros((len(x), degree+1))
+    if degree == 0:
+        X[:, 0] = 1.0
+    elif degree == 1:
+        X[:, 0] = 1.0
+        X[:, 1] = x
+    elif degree == 2:
+        X[:, 0] = 1.0
+        X[:, 1] = x
+        X[:, 2] = y
+    elif degree == 3:
+        X[:, 0] = 1.0
+        X[:, 1] = x
+        X[:, 2] = y
+        X[:, 3] = x@x.T
+    elif degree == 4:
+        X[:, 0] = 1.0
+        X[:, 1] = x
+        X[:, 2] = y
+        X[:, 3] = x@x.T
+        X[:, 4] = y@y.T
+    elif degree == 5:
+        X[:, 0] = 1.0
+        X[:, 1] = x
+        X[:, 2] = y
+        X[:, 3] = x@x.T
+        X[:, 4] = y@y.T
+        X[:, 5] = x@y.T
+    else:
+        print("Degree not implemented")
+    return X
+    """
