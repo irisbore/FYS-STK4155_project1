@@ -13,7 +13,7 @@ def FrankeFunction(x: np.meshgrid,y: np.meshgrid) -> np.array:
     return term1 + term2 + term3 + term4 #+ term5
 
 
-# Design matrix
+"""# Design matrix
 def create_design_matrix(x: np.array, y: np.array, p: int) -> np.array:
     X = np.zeros((len(x), int(1/2 * p* (p+3))))
     col_index = 0
@@ -23,4 +23,21 @@ def create_design_matrix(x: np.array, y: np.array, p: int) -> np.array:
                 X[:, col_index] = x**i + y**j
                 print(f"X[:, {col_index}], x**{i} + y**{j}")
                 col_index += 1
-    return X
+    return X"""
+
+    # Design matrix
+def create_design_matrix(x: np.array, y: np.array, n:int ) -> np.array:
+	if len(x.shape) > 1:
+		x = np.ravel(x)
+		y = np.ravel(y)
+
+	N = len(x)
+	l = int((n+1)*(n+2)/2)		# Number of elements in beta
+	X = np.ones((N,l))
+
+	for i in range(1,n+1):
+		q = int((i)*(i+1)/2)
+		for k in range(i+1):
+			X[:,q+k] = (x**(i-k))*(y**k)
+    
+	return X 
