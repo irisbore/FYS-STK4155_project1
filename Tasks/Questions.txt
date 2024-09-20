@@ -1,0 +1,4 @@
+1. Should our code run just as well independent of the data set? We experience that by reducing the amount of data points in x and y, the results are better. 
+2. Should our r2 values be between 0 and 1? If so, how should it be scaled? 
+3. when we insert the identity with shape (2,2), should our mse be 0 for all degrees?
+

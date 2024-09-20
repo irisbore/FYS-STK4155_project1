@@ -32,9 +32,9 @@ def beta_OLS(X: np.ndarray, z: np.ndarray) -> np.ndarray:
 	beta = np.linalg.pinv(X.T @ X) @ X.T @ z
 	return beta
 
-def beta_ridge(X: np.ndarray, z: np.ndarray, lamda_list: list):
+def beta_ridge(X: np.ndarray, z: np.ndarray, lamda: float) -> np.ndarray:
 	I = np.eye(X.shape[1])
-	betaRidge =  np.linalg.inv(X.T @ X + I*lamda[i]) @ X.T @ z
+	betaRidge =  np.linalg.inv(X.T @ X + I*lamda) @ X.T @ z
 	return betaRidge
 
 # Predict z from a design matrix and a beta array
@@ -48,5 +48,5 @@ def mse(true: np.ndarray, pred) -> np.ndarray:
 	return mse
 
 def r2(true: np.ndarray, pred: np.ndarray) -> np.ndarray:
-	r2 = 1 - np.sum((true - pred)**2) / np.sum((true - np.mean(true))**2)
+	r2 = 1 - (np.sum((true - pred)**2) / np.sum((true - np.mean(true))**2))
 	return r2
