@@ -37,6 +37,7 @@ def beta_ridge(X: np.ndarray, z: np.ndarray, lamda: float) -> np.ndarray:
 	betaRidge =  np.linalg.inv(X.T @ X + I*lamda) @ X.T @ z
 	return betaRidge
 
+
 # Predict z from a design matrix and a beta array
 def z_predict(X: np.ndarray, beta: np.ndarray) -> np.ndarray:
 	ztilde = X @ beta
