@@ -1,6 +1,5 @@
 import numpy as np
 import functions as f
-#from functions import FrankeFunction, create_design_matrix, OLS_beta
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 
@@ -15,7 +14,7 @@ z = z + np.random.randn(z.shape[0])
 #xv, yv = np.meshgrid(x,y)
 #z = FrankeFunction(xv, yv) #Add noise here
 #z = z + np.random.randn(z.shape[0], z.shape[1])
-degree = 0
+#degree = 0
 
 # Train-test-split
 X = f.create_design_matrix(x, y, degree)
@@ -28,5 +27,4 @@ X_train, X_test, z_train, z_test = train_test_split(X, z, test_size=0.2, random_
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
-
 
