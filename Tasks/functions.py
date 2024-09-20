@@ -1,7 +1,6 @@
 import numpy as np
 
 # Franke function
-
 def FrankeFunction(x: np.ndarray,y: np.ndarray) -> np.ndarray:
     term1 = 0.75*np.exp(-(0.25*(9*x-2)**2) - 0.25*((9*y-2)**2))
     term2 = 0.75*np.exp(-((9*x+1)**2)/49.0 - 0.1*(9*y+1))
@@ -11,20 +10,7 @@ def FrankeFunction(x: np.ndarray,y: np.ndarray) -> np.ndarray:
     return term1 + term2 + term3 + term4
 
 
-"""# Design matrix
-def create_design_matrix(x: np.array, y: np.array, p: int) -> np.array:
-    X = np.zeros((len(x), int(1/2 * p* (p+3))))
-    col_index = 0
-    for i in range(p):
-        for j in range(p-i):
-            if i+j != 0:
-                X[:, col_index] = x**i + y**j
-                print(f"X[:, {col_index}], x**{i} + y**{j}")
-                col_index += 1
-    return X"""
-
 # Design matrix
-
 def create_design_matrix(x: np.ndarray, y: np.ndarray, n:int ) -> np.ndarray:
 	if len(x.shape) > 1:
 		x = np.ravel(x)
@@ -40,3 +26,13 @@ def create_design_matrix(x: np.ndarray, y: np.ndarray, n:int ) -> np.ndarray:
 			X[:,q+k] = (x**(i-k))*(y**k)
     
 	return X 
+
+def OLS_beta(X: np.ndarray, z: np.ndarray) -> np.ndarray:
+	beta = np.linalg.pinv(X.T @ X) @ X.T @ z
+	return beta
+
+
+def z_predict(X: np.ndarray, beta: np.ndarray) -> np.ndarray:
+	ztilde = X @ beta
+	return ztilde
+	
