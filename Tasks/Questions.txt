@@ -5,4 +5,4 @@
 6. fordeler med å skalere bare med std vs med mean?
 
 7. Should we use the same seed for every plot generation? bootstrap only gives interpretable results for new seed. Ønsker egt samme hyperparametere i hver deloppgave
-¨
+8. how to get the bias variance trade off without too high values on the axis. vis hvordan den varierer
