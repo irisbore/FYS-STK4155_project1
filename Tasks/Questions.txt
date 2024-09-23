@@ -5,5 +5,5 @@
 5. Same with cross validation plot. Should we scale z as well? 
 
 
-
+6. fordeler med å skalere bare med std vs med mean?
 
