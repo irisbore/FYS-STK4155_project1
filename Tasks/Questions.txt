@@ -1,9 +1,8 @@
 1. Should our code run just as well independent of the data set? We experience that by reducing the amount of data points in x and y, the results are better. 
 2. Should our r2 values be between 0 and 1? If so, how should it be scaled? 
-3. when we insert the identity with shape (2,2), should our mse be 0 for all degrees?
-4. Why is the plots in b and c wrong on the axises? Is it a problem with scaling?
-5. Same with cross validation plot. Should we scale z as well? 
-
-
+4. Why is the plots in a, b and c so dependent on the dataset?
+5. Scaling in CV
 6. fordeler med å skalere bare med std vs med mean?
 
+7. Should we use the same seed for every plot generation? bootstrap only gives interpretable results for new seed. Ønsker egt samme hyperparametere i hver deloppgave
+¨
