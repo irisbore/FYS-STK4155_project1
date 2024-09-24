@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 
 """ File creating dataset so we use the same throughout the project"""
 
-def load_normal_data(N_samples: int= 100, noise:float = 0.1, seed:int = 42):
+def load_normal_data(N_samples: int= 100, noise:float = 0.1, seed:int = 2024):
     np.random.seed(seed)
     x = np.random.rand(N_samples)
     y = np.random.randn(N_samples)
