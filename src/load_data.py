@@ -7,7 +7,6 @@ from sklearn.model_selection import train_test_split
 
 def load_normal_data(N_samples: int= 100, noise:float = 0.1, seed:int = 42):
     np.random.seed(seed)
-    N_samples = 100
     x = np.random.rand(N_samples)
     y = np.random.randn(N_samples)
     z = f.FrankeFunction(x,y) 
@@ -15,7 +14,7 @@ def load_normal_data(N_samples: int= 100, noise:float = 0.1, seed:int = 42):
     return x, y, z
 
 
-def load_range_data(step_size: float= 0.01, noise:float = 0.1, seed:int = 42):
+def load_range_data(step_size: float= 0.05, noise:float = 0.1, seed:int = 42):
     np.random.seed(seed)
     x = np.arange(0, 1, step_size)
     y = np.arange(0, 1, step_size)
