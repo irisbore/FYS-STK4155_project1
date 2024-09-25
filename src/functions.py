@@ -1,4 +1,9 @@
 import numpy as np
+from sklearn.preprocessing import StandardScaler
+import git
+import sys
+path_to_root = git.Repo(".", search_parent_directories=True).working_dir
+sys.path.append(path_to_root)
 
 # Franke function
 def FrankeFunction(x: np.ndarray,y: np.ndarray) -> np.ndarray:
@@ -51,3 +56,12 @@ def mse(true: np.ndarray, pred) -> np.ndarray:
 def r2(true: np.ndarray, pred: np.ndarray) -> np.ndarray:
 	r2 = 1 - (np.sum((true - pred)**2) / np.sum((true - np.mean(true))**2))
 	return r2
+
+def scale_train_test(train: np.ndarray, test:np.ndarray, with_std:bool=True, with_mean:bool=True) -> np.ndarray:
+	scaler = StandardScaler(with_std=with_std, with_mean=with_mean) #Subtracting the mean and dividing by the standard deviation to scale/normalize the data
+	train = scaler.fit_transform(train)
+	test = scaler.transform(test)
+	return train, test
+
+def save_to_results(filename: str) -> None:
+	plt.savefig(fname = path_to_root+'/results/'+filename)

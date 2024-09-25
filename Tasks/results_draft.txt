@@ -1,0 +1,2 @@
+e)
+With low sample size, we dont illustrate the bias variance tradeoff as the variance is crazy high with high polynomial degree. If we increase the sample size, we see the effect. 

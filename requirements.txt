@@ -9,3 +9,4 @@ pandas
 pillow
 jupyterlab
 seaborn
+git-python
