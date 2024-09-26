@@ -3,25 +3,20 @@ from imageio import imread
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib import cm
-from sklearn.model_selection import cross_val_score
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-from matplotlib.ticker import LinearLocator, FormatStrFormatter
 plt.style.use('seaborn-v0_8-whitegrid')
 import git
 import sys
-sys.path.append("../")
-import functions as f
 path_to_root = git.Repo(".", search_parent_directories=True).working_dir
-sys.path.append(path_to_root+'src'+'/')
+sys.path.append(path_to_root+'/src'+'/')
+print(sys.path)
+import functions as f
 
 # Load the terrain data
 terrain_data = imread(path_to_root+"/data/SRTM_data_Norway_1.tif")
 
 # Define the x and y coordinates
-
 x = np.arange(0, terrain_data.shape[1], 10)
 y = np.arange(0, terrain_data.shape[0], 10)
 
@@ -67,15 +62,17 @@ ztilde = z_scaler.inverse_transform(ztilde)
 
 ztilde_mesh = ztilde.reshape(zv.shape)
 
+# Plot heatmap
+aspect_ratio = xv.shape[1] / yv.shape[0]
+plt.figure(figsize=(5, 5 / aspect_ratio))
 heatmap = plt.pcolormesh(xv, yv, ztilde_mesh, cmap='viridis')
-
 # Add color bar
 plt.colorbar(heatmap)
 
 # Set labels and title
 plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
-plt.title('Heatmap of sampled terrain data')
+plt.title('Heatmap of OLS regression on sampled terrain data')
 plt.gca().invert_yaxis()
-
+f.save_to_results(filename = "ols_terrain_heatmap.png")
 plt.show()
