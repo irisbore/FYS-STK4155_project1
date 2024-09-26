@@ -1,14 +1,17 @@
+
 import numpy as np
 from imageio import imread
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
 from sklearn.model_selection import train_test_split
+from sklearn.linear_model import Lasso
 plt.style.use('seaborn-v0_8-whitegrid')
 import git
 import sys
 sys.path.append("../")
 path_to_root = git.Repo(".", search_parent_directories=True).working_dir
 sys.path.append(path_to_root+'/src'+'/')
+print(sys.path)
 import functions as f
 
 # Load the terrain data
@@ -28,11 +31,10 @@ x = xv.flatten()
 y = yv.flatten()
 z = zv.flatten().reshape(-1, 1)
 
-# Set the best polynomial degree
+# Set best degree
 degree = 14
 
-# Set the lambda space
-lambda_values = np.logspace(-5, 3, 9)
+lambda_values = np.logspace(-5, -3, 2)
 
 # Create polynomial features
 poly_features = PolynomialFeatures(degree=degree)
@@ -51,24 +53,36 @@ z_train = z_scaler.fit_transform(z_train)
 z_test = z_scaler.transform(z_test)
 
 mse_temp = np.zeros(len(lambda_values))
+
 for j, lambda_ in enumerate(lambda_values):
-    #Calculating OLSbeta, ztilde, mse and R2
-    beta_ridge_temp = f.beta_ridge(X_train, z_train, lambda_)
-    ztilde_temp = f.z_predict(X_test, beta_ridge_temp)
-    mse_temp[j] = f.mse(z_test, ztilde_temp)
+    # Create and fit the linear regression model
+    model = Lasso(alpha = lambda_values[j], tol = 1e-3, selection = 'random', precompute=True, fit_intercept=False, max_iter=10000) #selection = "random"
+    model.fit(X_train, z_train)
+
+    # Make predictions for training and test data
+    z_train_pred = model.predict(X_train)
+    z_test_pred = model.predict(X_test)
+
+    mse_test = f.r2(z_test, z_test_pred)
+
+    mse_temp[j] = mse_test
 
 j = np.argmin(mse_temp)
-beta_ridge = f.beta_ridge(X_train, z_train, lambda_values[j])
-ztilde = f.z_predict(X_test, beta_ridge)
+print(lambda_values[j])
+
+# Create and fit the linear regression model with the optimal lambda value
+model = Lasso(alpha = lambda_values[j], tol = 1e-3, selection = 'random', precompute=True, fit_intercept=False, max_iter=10000)
+model.fit(X_train, z_train)
+
 
 # Predict z with whole dataset
 X = X_scaler.transform(X)
-ztilde = f.z_predict(X, beta_ridge)
+beta_lasso = model.coef_
+ztilde = f.z_predict(X, beta_lasso).reshape(-1,1)
 
 ztilde = z_scaler.inverse_transform(ztilde)
 
 ztilde_mesh = ztilde.reshape(zv.shape)
-
 
 # Plot heatmap
 aspect_ratio = xv.shape[1] / yv.shape[0]
@@ -81,7 +95,7 @@ plt.colorbar(heatmap)
 # Set labels and title
 plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
-plt.title('Heatmap of Ridge regression on sampled terrain data')
+plt.title('Heatmap of Lasso regression on sampled terrain data')
 plt.gca().invert_yaxis()
-#f.save_to_results(filename = "ridge_terrain_heatmap.png")
+f.save_to_results(filename = "lasso_terrain_heatmap.png")
 plt.show()
