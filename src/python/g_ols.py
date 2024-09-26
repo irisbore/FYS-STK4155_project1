@@ -59,6 +59,8 @@ ztilde = f.z_predict(X_test, OLSbeta)
 mse = f.mse(z_test, ztilde)
 R2 = f.r2(z_test, ztilde)
 
+# Predict z with whole dataset
+X = X_scaler.transform(X)
 ztilde = f.z_predict(X, OLSbeta)
 
 ztilde = z_scaler.inverse_transform(ztilde)
