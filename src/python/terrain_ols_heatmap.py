@@ -31,7 +31,7 @@ y = yv.flatten()
 z = zv.flatten().reshape(-1, 1)
 
 # Set the best polynomial degree
-degree = 14
+degree = 3
 
 poly_features = PolynomialFeatures(degree=degree)
 X = poly_features.fit_transform(np.column_stack((x, y)))
@@ -74,5 +74,5 @@ plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
 plt.title('Heatmap of OLS regression on sampled terrain data')
 plt.gca().invert_yaxis()
-f.save_to_results(filename = "ols_terrain_heatmap.png")
+f.save_to_results(filename = "cv_ols_terrain_heatmap.png")
 plt.show()
