@@ -2,6 +2,7 @@ import numpy as np
 from imageio import imread
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import PolynomialFeatures, StandardScaler
+from sklearn.linear_model import Ridge
 from sklearn.model_selection import train_test_split
 plt.style.use('seaborn-v0_8-whitegrid')
 import git
@@ -29,11 +30,11 @@ y = yv.flatten()
 z = zv.flatten().reshape(-1, 1)
 
 # Set the best polynomial degree
-degree = 14
+degree = 5
 
-# Set the lambda space
-lambda_values = np.logspace(-5, 3, 9)
-
+# Set the best lambda value found in cross validation
+#lambda_values = np.logspace(-5, 3, 9)
+lambda_value = 1e2
 # Create polynomial features
 poly_features = PolynomialFeatures(degree=degree)
 X = poly_features.fit_transform(np.column_stack((x, y)))
@@ -50,15 +51,17 @@ z_scaler = StandardScaler()
 z_train = z_scaler.fit_transform(z_train)
 z_test = z_scaler.transform(z_test)
 
-mse_temp = np.zeros(len(lambda_values))
-for j, lambda_ in enumerate(lambda_values):
+#mse_temp = np.zeros(len(lambda_values))
+#for j, lambda_ in enumerate(lambda_values):
     #Calculating OLSbeta, ztilde, mse and R2
-    beta_ridge_temp = f.beta_ridge(X_train, z_train, lambda_)
-    ztilde_temp = f.z_predict(X_test, beta_ridge_temp)
-    mse_temp[j] = f.mse(z_test, ztilde_temp)
+    #beta_ridge_temp = f.beta_ridge(X_train, z_train, lambda_)
+    #ztilde_temp = f.z_predict(X_test, beta_ridge_temp)
+    #mse_temp[j] = f.mse(z_test, ztilde_temp)
 
-j = np.argmin(mse_temp)
-beta_ridge = f.beta_ridge(X_train, z_train, lambda_values[j])
+#j = np.argmin(mse_temp)
+#beta_ridge = f.beta_ridge(X_train, z_train, lambda_values[j])
+model = Ridge(alpha=lambda_value, fit_intercept=False)
+beta_ridge = model.fit(X_train, z_train).coef_.T
 ztilde = f.z_predict(X_test, beta_ridge)
 
 # Predict z with whole dataset

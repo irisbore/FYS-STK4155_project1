@@ -32,9 +32,10 @@ y = yv.flatten()
 z = zv.flatten().reshape(-1, 1)
 
 # Set best degree
-degree = 14
+degree = 4
 
 lambda_values = np.logspace(-5, -3, 2)
+lambda_value = 0.1
 
 # Create polynomial features
 poly_features = PolynomialFeatures(degree=degree)
@@ -71,7 +72,7 @@ j = np.argmin(mse_temp)
 print(lambda_values[j])
 
 # Create and fit the linear regression model with the optimal lambda value
-model = Lasso(alpha = lambda_values[j], tol = 1e-3, selection = 'random', precompute=True, fit_intercept=False, max_iter=10000)
+model = Lasso(alpha = lambda_value, tol = 1e-3, selection = 'random', precompute=True, fit_intercept=False, max_iter=10000)
 model.fit(X_train, z_train)
 
 
@@ -97,5 +98,5 @@ plt.xlabel('X-axis')
 plt.ylabel('Y-axis')
 plt.title('Heatmap of Lasso regression on sampled terrain data')
 plt.gca().invert_yaxis()
-f.save_to_results(filename = "lasso_terrain_heatmap.png")
+#f.save_to_results(filename = "lasso_terrain_heatmap.png")
 plt.show()
