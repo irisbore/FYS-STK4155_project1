@@ -1,9 +1,17 @@
 # FYS-STK4155_project1
 
-.
-├──  results                 # The plots to be included in the report
-├──  src                   
-│   ├──  notebooks           # Folder containing the notebooks used to produce the plots, one for each part of the exercise
-│   └──  functions.py        # Contains the functions used to compute the results when using own code
-└── 
+    ├── build                   # Compiled files (alternatively `dist`)
+    ├── docs                    # Documentation files (alternatively `doc`)
+    ├── src                     # Source files (alternatively `lib` or `app`)
+    ├── test                    # Automated tests (alternatively `spec` or `tests`)
+    ├── tools                   # Tools and utilities
+    ├── LICENSE
+    └── README.md
 
+       .
+    ├── ...
+    ├── test                    # Test files (alternatively `spec` or `tests`)
+    │   ├── benchmarks          # Load and stress tests
+    │   ├── integration         # End-to-end, integration tests (alternatively `e2e`)
+    │   └── unit                # Unit tests
+    └── ...
