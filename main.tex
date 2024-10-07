@@ -1,0 +1,113 @@
+\documentclass[12pt,a4paper,english,nofootinbib,sort&compress,numbers]{revtex4-2} % Defines the basic parameters of the document
+% If you want a doubble-column, add "reprint"
+
+% Allows special characters (including æøå)
+\usepackage[utf8]{inputenc}
+
+% It may be usefult to download TeXMaker, because it includes a large library of the most common packages.
+
+\usepackage{physics,amssymb}  % mathematical symbols (physics imports amsmath)
+\usepackage{amsmath}          %Allows usage of mathematical expressions
+\usepackage{graphicx}         % include graphics such as plots
+\graphicspath{ {Images/} }
+
+\usepackage{xcolor}           % set colors
+\usepackage{hyperref}         % automagic cross-referencing
+\usepackage{listings}         % display code
+
+\usepackage{algorithm}        % structure and display algorithms
+\usepackage[noend]{algpseudocode} % environment to write pseudocode
+\usepackage{float}            % make sure that algorithms float with revtex4-2
+\usepackage{tikz}             % for creating graphics
+% Defines the color of hyperref objects
+% Blending two colors:  blue!80!black  =  80% blue and 20% black
+\hypersetup{ % this is just my personal choice, feel free to change things
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={blue!50!black},
+    urlcolor={blue!80!black}}
+
+
+\usepackage{caption}          %Allows usage of plots
+\usepackage{subcaption}       %Allows usage of subplots
+
+\newcommand{\iris}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\jonas}[1]{\textbf{\textcolor{red}{#1}}}
+
+\newcommand{\nl}{\bigskip\noindent}
+
+
+\begin{document}
+% ===========================================
+% Title and authors
+\title{FYS-STK4155 Project 1 \\ Comparison of the Linear regression models OLS, Ridge and Lasso}       
+\author{Iris Bore, Lars-Martin Gihle \& Jonas Båtnes   \\ \textit{University of Oslo, Department of Physics}}   % Sets the author's name.
+\date{\today}                  % Sets the document date.
+
+% ===========================================
+
+\noaffiliation                 % Ignore this, but keep it.
+
+\begin{abstract}
+    
+\end{abstract}
+
+\maketitle
+
+% ===========================================
+\section{Abstract}
+%
+\label{sec:Abstract}
+\input{text/Abstract}
+
+% ===========================================
+% ===========================================
+\newpage
+\section{Introduction}
+%
+\label{sec:introduction}
+\input{text/Introduction}
+
+% ===========================================
+\newpage
+\section{Methods}\label{sec:methods}
+%
+\label{sec:methods}
+\input{text/Methods}
+
+% ===========================================
+\newpage
+\section{Results and discussion}\label{sec:results_and_discussion}
+%
+\label{sec:results}
+\input{text/Results}
+
+% ===========================================
+\newpage
+\section{Conclusion}\label{sec:conclusion}
+%
+\label{sec:conclusion}
+\input{text/Conclusion}
+
+
+% ===========================================
+\newpage
+ \section*{Appendix A}\label{sec:AppendixA}
+%
+\label{sec:appendix}
+\input{text/Appendix}
+
+% An appendix can be useful if there are details you want to include that do not fit in the main text. But if you include an appendix, make sure to explicitly refer to it somewhere in the main text.
+
+
+% ===========================================
+\onecolumngrid
+
+\clearpage
+
+\section*{References}
+\bibliographystyle{unsrt}
+\bibliography{bibliography.bib}
+
+
+\end{document}
