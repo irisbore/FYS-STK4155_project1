@@ -9,5 +9,6 @@
     │   ├── python                         # Code for plotting heatmaps of terrain data
     │   ├── functions.py                   # File containing most used functions
     │   └── load_data.py                   # File containing function to load dataset
+    ├── project1_report.pdf             # The report to be submitted for this project
     ├── undeliverables                  # Contain working notebooks for trail and error, not in the project delivery
     └──  requirements.txt               # Python libraries needed for running the code. Install with ´pip -r requirements.txt´
